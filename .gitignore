@@ -1,5 +1,7 @@
 # Logs
 logs
+example/node_modules/
+node_modules/
 *.log
 
 # Runtime data

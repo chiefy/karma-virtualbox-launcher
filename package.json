@@ -1,0 +1,17 @@
+{
+  "name": "karma-vbie-launcher",
+  "version": "0.0.1",
+  "description": "A karma launcher for virtualbox windows VM w/ IE",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Christopher Najewicz <chief@beefdisciple.com>",
+  "license": "MIT",
+  "dependencies": {
+    "virtualbox": "0.0.5"
+  },
+  "peer-dependencies" : {
+    "karma" : "^0.10.9"
+  }
+}
