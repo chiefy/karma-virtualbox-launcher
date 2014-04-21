@@ -6,11 +6,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Hans Gruber",
+  "license": "MIT",
   "devDependencies": {
     "karma": "~0.12.9",
     "karma-jasmine": "~0.1.5",
-    "karma-phantomjs-launcher": "~0.1.4"
+    "karma-virtualbox-launcher": "*"
   }
 }
