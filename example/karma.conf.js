@@ -57,7 +57,8 @@ module.exports = function(config) {
             'WIN7IE8': {
                 base: 'VirtualBoxBrowser',
                 config: {
-                    vm_name: 'IE8 - Win7'
+                    vm_name: 'IE8 - Win7',
+                    use_gui: true
                 }
             },
             'WIN7IE9': {

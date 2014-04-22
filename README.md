@@ -1,7 +1,7 @@
 karma-virtualbox-launcher
 ===================
 
-Launcher for using VirtualBox IE / Windows VMs
+Launcher for using VirtualBox VMs
 
 This is a little launcher I developed for using VirtualBox VMs with various flavors of Internet Explorer to test using Karma.
 
@@ -17,7 +17,8 @@ customLaunchers: {
     'IE8': {
         base: 'VirtualBoxBrowser',
         config: {
-            vm_name: 'IE8 - Win7' // configured name of your Virtualbox VM
+            vm_name: 'IE8 - Win7', // configured name of your Virtualbox VM
+            use_gui: true // use VirtualBox GUI mode, by default runs headless
         }
     },
     'IE9': {
@@ -38,3 +39,4 @@ browsers: ['IE8', 'IE9'],
 * Need to test in non-Windows host environments.
 * Only supports IE at the moment.
 * No killing of guest browsers (yet).
+* One karma.conf.js per VM.

@@ -25,7 +25,8 @@ function VirtualBoxBrowserInstance(baseBrowserDecorator, logger, args) {
     args.config = _.defaults(args.config, {
         vm_name: null,
         user: 'IEUser',
-        password: 'Passw0rd!'
+        password: 'Passw0rd!',
+        use_gui: false
     });
 
     if (!args.config.vm_name) {
@@ -34,6 +35,7 @@ function VirtualBoxBrowserInstance(baseBrowserDecorator, logger, args) {
 
     this.vm_name = args.config.vm_name;
     this.name = this.vm_name + ' via ' + this.name;
+    this.use_gui = args.config.use_gui;
     this.credentials = {
         user: args.config.user,
         password: args.config.password
@@ -85,7 +87,7 @@ function VirtualBoxBrowserInstance(baseBrowserDecorator, logger, args) {
 
         log.info('starting virtualbox vm w/' + url);
 
-        vb.start(vm_name, function(err) {
+        vb.start(vm_name, this.use_gui, function(err) {
             if (err) {
                 throw err;
             }
