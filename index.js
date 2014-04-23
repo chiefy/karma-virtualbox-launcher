@@ -77,6 +77,20 @@ function VirtualBoxBrowserInstance(baseBrowserDecorator, logger, args) {
         });
     }
 
+    this.on('kill', function(cb){
+        var that = this;
+        log.debug('Killing ' + PROCESS_NAME + ' on ' + that.vm_name);
+        vb.kill({
+            user: that.credentials.user,
+            password: that.credentials.password,
+            vm: that.vm_name,
+            cmd: 'iexplore.exe'
+        }, function() {
+            log.debug('Succesfully killed process ' + PROCESS_NAME + ' on ' + that.vm_name);
+            cb();
+        });
+    });
+
     // @todo need to queue these up if there's > 1 VM
     this._start = function(url) {
         var exec = _.bind(this._exec, this),
@@ -84,8 +98,6 @@ function VirtualBoxBrowserInstance(baseBrowserDecorator, logger, args) {
 
         // @todo figure out if host is win / osx / linux, get IP programatically
         url = url.replace('localhost', '10.0.2.2');
-
-        log.info('starting virtualbox vm w/' + url);
 
         vb.start(vm_name, this.use_gui, function(err) {
             if (err) {
