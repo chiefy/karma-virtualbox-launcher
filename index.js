@@ -5,6 +5,7 @@ var urlparse = require('url').parse,
     urlformat = require('url').format,
     _ = require('lodash'),
     vb = require('virtualbox'),
+    sleep = require('deasync').sleep,
     PROCESS_NAME = 'C:\\Program Files\\Internet Explorer\\iexplore.exe';
 
 module.exports = {
@@ -63,18 +64,48 @@ function VirtualBoxBrowserInstance(baseBrowserDecorator, logger, args) {
     };
 
     this._exec = function(url) {
-        var that = this;
-        vb.exec({
-            user: that.credentials.user,
-            password: that.credentials.password,
-            vm: that.vm_name,
-            cmd: PROCESS_NAME,
-            params: url
-        }, function(err) {
+
+      var that = this;
+      var conf = {
+        user: that.credentials.user,
+        password: that.credentials.password,
+        vm: that.vm_name,
+        cmd: PROCESS_NAME,
+        params: url
+      };
+
+      var maxtime = 120000,
+          timetick = 15000,
+          curtime = 0;
+
+      function syncFunc() {
+        var sync = true;
+        while(sync) {
+          vb.exec(conf, function(err){
             if (err) {
+              if (/The guest execution service is not ready/.test(err.message)) {
+                if (curtime >= maxtime) {
+                  sync = false;
+                  throw err;
+                } else {
+                  curtime += timetick;
+                }
+              } else {
+                sync = false;
                 throw err;
+              }
+            } else {
+              sync = false;
             }
-        });
+          });
+          if (sync) {
+            sleep(timetick);
+          }
+        }
+        return;
+      }
+
+      return syncFunc();
     }
 
     this.on('kill', function(cb){
