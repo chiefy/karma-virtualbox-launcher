@@ -46,6 +46,20 @@ function VirtualBoxBrowserInstance(baseBrowserDecorator, logger, args) {
     };
 
     baseBrowserDecorator(this);
+    
+    this.kill = function(callback) {
+        var that = this;
+        vb.kill({
+            user: that.credentials.user,
+            password: that.credentials.password,
+            vm: that.vm_name,
+            cmd: PROCESS_NAME,
+            image_name: "iexplore.exe"
+        }, function(err) {
+        callback.call();
+      });
+      return true;
+    }
 
     var log = logger.create('launcher:' + this.name),
         flags = args.flags || {};
