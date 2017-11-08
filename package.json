@@ -9,9 +9,9 @@
   "author": "Christopher Najewicz <chief@beefdisciple.com>",
   "license": "MIT",
   "dependencies": {
-    "deasync": "0.0.7",
-    "virtualbox": "chiefy/node-virtualbox",
-    "lodash": "~2.4.1"
+    "deasync": "^0.1.10",
+    "lodash": "^4.17.4",
+    "virtualbox": "^0.1.3"
   },
   "peer-dependencies": {
     "karma": "^0.10.9"
