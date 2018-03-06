@@ -4,16 +4,17 @@
   "description": "A karma launcher for virtualbox VMs",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "node scripts/postinstall.js"
   },
   "author": "Christopher Najewicz <chief@beefdisciple.com>",
   "license": "MIT",
   "dependencies": {
-    "deasync": "0.0.7",
-    "virtualbox": "chiefy/node-virtualbox",
-    "lodash": "~2.4.1"
+    "deasync": "^0.1.10",
+    "lodash": "^4.17.4",
+    "virtualbox": "nexiahome/node-virtualbox"
   },
   "peer-dependencies": {
-    "karma": "^0.10.9"
+    "karma": "^1.7.0"
   }
 }
